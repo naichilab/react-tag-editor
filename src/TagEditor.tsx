@@ -1,15 +1,16 @@
 import { FC } from 'react';
-import TagName from './TagName';
+import TagNameCollection from './TagNameCollection';
 import './TagEditor.css';
 
-const TagEditor: FC = () => (
-  <div className="TagEditor">
-    <TagName name="aaa" lock />
-    <TagName name="bbb" lock />
-    <TagName name="ccc" lock />
-    <TagName name="ddd" lock={false} />
-    <TagName name="eee" lock={false} />
-  </div>
-);
+const tags = [
+  { name: 'アクション', lock: true },
+  { name: 'シューティング', lock: true },
+  { name: 'オンライン', lock: true },
+  { name: 'ほげほげ', lock: false },
+  { name: 'XXXXXXXX', lock: false },
+  { name: 'aiueo', lock: false },
+];
+
+const TagEditor: FC = () => <TagNameCollection tags={tags} />;
 
 export default TagEditor;
