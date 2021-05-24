@@ -1,0 +1,26 @@
+.TagName {
+  display: inline-block;
+  padding: 0 0.8em;
+  border: 1px solid #ddd;
+  border-radius: 0.8em;
+}
+
+.TagName-Contents {
+  display: flex;
+  align-items: center;
+}
+
+.TagName-LockImg {
+  height: 1.2em;
+  margin-left: -0.4em;
+}
+
+.TagName-Text {
+  margin: 0 0.2em;
+  line-height: 1.4em;
+}
+
+.TagName-Delete {
+  height: 1.2em;
+  margin-right: -0.6em;
+}
