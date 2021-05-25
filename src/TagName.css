@@ -1,6 +1,7 @@
 .TagName {
   display: inline-block;
   padding: 0 0.8em;
+  margin-right: 8px;
   border: 1px solid #ddd;
   border-radius: 0.8em;
 }
@@ -17,7 +18,7 @@
 
 .TagName-Text {
   margin: 0 0.2em;
-  line-height: 1.4em;
+  line-height: 1.6em;
 }
 
 .TagName-Delete {

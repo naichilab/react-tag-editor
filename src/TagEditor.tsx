@@ -11,6 +11,10 @@ const tags = [
   { name: 'aiueo', lock: false },
 ];
 
-const TagEditor: FC = () => <TagNameCollection tags={tags} />;
+const TagEditor: FC = () => (
+  <div className="TagEditor">
+    <TagNameCollection tags={tags} />
+  </div>
+);
 
 export default TagEditor;
