@@ -1,9 +1,9 @@
 .TagEditor .TagName {
   display: inline-block;
-  padding: 0 0.8em;
+  padding: 0 0.4rem 0 0.6rem;
   margin-right: 8px;
   border: 1px solid #ddd;
-  border-radius: 0.8em;
+  border-radius: 0.2em;
 }
 
 .TagEditor .TagName-Contents {
@@ -11,17 +11,49 @@
   align-items: center;
 }
 
-.TagEditor .TagName-LockImg {
-  height: 1.2em;
-  margin-left: -0.4em;
-}
-
 .TagEditor .TagName-Text {
-  margin: 0 0.2em;
+  margin: 0 0.5rem 0 0;
   line-height: 1.6em;
 }
 
+.TagEditor .TagName-LockImg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
 .TagEditor .TagName-Delete {
-  height: 1.2em;
-  margin-right: -0.6em;
+  position: relative;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 0.2rem;
+}
+
+.TagEditor .TagName-Delete::after,
+.TagEditor .TagName-Delete::before {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  display: block;
+  width: 40%;
+  margin: auto;
+  content: '';
+  border-top: 1px solid rgb(172, 172, 172);
+}
+
+.TagEditor .TagName-Delete::after {
+  transform: skewY(-45deg);
+}
+
+.TagEditor .TagName-Delete::before {
+  transform: skewY(45deg);
+}
+
+.TagEditor .TagName-Delete:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+.TagEditor .TagName-Delete:hover::after,
+.TagEditor .TagName-Delete:hover::before {
+  border-color: #000;
 }
