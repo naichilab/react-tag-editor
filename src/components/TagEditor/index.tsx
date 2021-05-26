@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import TagNameCollection from './TagNameCollection';
-import InputBox from './InputBox';
-import './TagEditor.css';
+import InputBox from '../InputBox';
+import './style.css';
 
 const tags = [
   { name: 'アクション', lock: true },

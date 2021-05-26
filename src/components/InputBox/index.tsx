@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import './InputBox.css';
+import './style.css';
 
 type Props = {
   text: string;

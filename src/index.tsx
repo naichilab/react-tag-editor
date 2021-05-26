@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import TagEditor from './TagEditor';
+import TagEditor from './components/TagEditor';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(

@@ -1,4 +1,4 @@
-.TagName {
+.TagEditor .TagName {
   display: inline-block;
   padding: 0 0.8em;
   margin-right: 8px;
@@ -6,22 +6,22 @@
   border-radius: 0.8em;
 }
 
-.TagName-Contents {
+.TagEditor .TagName-Contents {
   display: flex;
   align-items: center;
 }
 
-.TagName-LockImg {
+.TagEditor .TagName-LockImg {
   height: 1.2em;
   margin-left: -0.4em;
 }
 
-.TagName-Text {
+.TagEditor .TagName-Text {
   margin: 0 0.2em;
   line-height: 1.6em;
 }
 
-.TagName-Delete {
+.TagEditor .TagName-Delete {
   height: 1.2em;
   margin-right: -0.6em;
 }
