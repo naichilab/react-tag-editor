@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import TagEditor from './components/TagEditor';
 import reportWebVitals from './reportWebVitals';
+import tags from './tags';
 
 ReactDOM.render(
   <React.StrictMode>
-    <TagEditor />
+    <TagEditor allTags={tags.sort()} />
   </React.StrictMode>,
   document.getElementById('root'),
 );

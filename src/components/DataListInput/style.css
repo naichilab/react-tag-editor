@@ -1,0 +1,7 @@
+.DataListInput input {
+  width: 20rem;
+  padding: 0 1rem;
+  line-height: 1.6rem;
+  border: 1px solid #ddd;
+  border-radius: 0.2rem;
+}
