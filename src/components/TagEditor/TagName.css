@@ -3,6 +3,7 @@
   padding: 0 0.4rem 0 0.6rem;
   margin-right: 8px;
   margin-bottom: 8px;
+  content: '';
   border: 1px solid #ddd;
   border-radius: 0.2em;
 }
@@ -14,12 +15,22 @@
 
 .TagEditor .TagName-Text {
   margin: 0 0.5rem 0 0;
+  font-size: 1rem;
   line-height: 1.6em;
 }
 
 .TagEditor .TagName-LockImg {
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+.TagEditor button {
+  padding: 0;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  appearance: none;
 }
 
 .TagEditor .TagName-Delete {
@@ -57,4 +68,10 @@
 .TagEditor .TagName-Delete:hover::after,
 .TagEditor .TagName-Delete:hover::before {
   border-color: #000;
+}
+
+.clearText {
+  overflow: hidden;
+  text-indent: 300%;
+  white-space: nowrap;
 }

@@ -32,6 +32,7 @@ const DataListInput: FC<Props> = ({
         }
       }}
     />
+    <button type="button">登録</button>
     <DataList dataListId={listName} options={options} />
   </div>
 );

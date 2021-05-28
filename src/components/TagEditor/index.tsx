@@ -30,17 +30,19 @@ const TagEditor: FC<Props> = ({
     });
   };
 
+  const deleteTag = (tagName: string) => {
+    setCurrentTags((tags) => tags.filter((x) => x.name !== tagName));
+  };
+
   return (
     <div className="TagEditor">
-      <TagNameCollection tags={currentTags} />
-      <div className="TagEditor-DataListInput">
-        <DataListInput
-          listName="tags"
-          placeHolder="追加したいタグ名を入力"
-          options={initialAllTags}
-          addCurrentTag={addCurrentTag}
-        />
-      </div>
+      <TagNameCollection tags={currentTags} onTagDeleteHandler={deleteTag} />
+      <DataListInput
+        listName="tags"
+        placeHolder="追加したいタグ名を入力"
+        options={initialAllTags}
+        addCurrentTag={addCurrentTag}
+      />
     </div>
   );
 };
