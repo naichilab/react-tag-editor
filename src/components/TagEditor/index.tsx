@@ -1,37 +1,48 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import TagNameCollection from './TagNameCollection';
-import InputBox from '../InputBox';
 import './style.css';
 import DataListInput from '../DataListInput';
 
-const tags = [
-  { name: 'アクション', lock: true },
-  { name: 'シューティング', lock: true },
-  { name: 'オンライン', lock: true },
-  { name: 'ほげほげ', lock: false },
-  { name: 'XXXXXXXX', lock: false },
-  { name: 'aiueo', lock: false },
-];
-
-type Props = {
-  allTags: string[];
+type Tag = {
+  name: string;
+  lock: boolean;
 };
 
-const TagEditor: FC<Props> = ({ allTags }: Props) => (
-  <div className="TagEditor">
-    <TagNameCollection tags={tags} />
-    <div className="TagEditor-InputBox">
-      <InputBox text="hoge" />
-    </div>
+type Props = {
+  initialCurrentTags: Tag[];
+  initialAllTags: string[];
+};
 
-    <div className="TagEditor-DataListInput">
-      <DataListInput
-        listName="tags"
-        placeHolder="追加したいタグ名を入力"
-        options={allTags}
-      />
+const TagEditor: FC<Props> = ({
+  initialCurrentTags,
+  initialAllTags,
+}: Props) => {
+  const [currentTags, setCurrentTags] = useState<Tag[]>(initialCurrentTags);
+
+  const addCurrentTag = (newTag: Tag) => {
+    if (newTag.name === '') return;
+    setCurrentTags((c) => {
+      const copy = c.slice();
+      copy.push(newTag);
+      const copy2 = Array.from(new Set(copy));
+
+      return copy2;
+    });
+  };
+
+  return (
+    <div className="TagEditor">
+      <TagNameCollection tags={currentTags} />
+      <div className="TagEditor-DataListInput">
+        <DataListInput
+          listName="tags"
+          placeHolder="追加したいタグ名を入力"
+          options={initialAllTags}
+          addCurrentTag={addCurrentTag}
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default TagEditor;

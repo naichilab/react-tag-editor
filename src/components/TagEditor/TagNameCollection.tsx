@@ -2,8 +2,13 @@ import { FC } from 'react';
 import TagName from './TagName';
 import './TagNameCollection.css';
 
+type Tag = {
+  name: string;
+  lock: boolean;
+};
+
 type Props = {
-  tags: { name: string; lock: boolean }[];
+  tags: Tag[];
 };
 
 const TagNameCollection: FC<Props> = ({ tags }: Props) => (
