@@ -1,8 +1,6 @@
 .TagEditor .TagName {
   display: inline-block;
   padding: 0 0.4rem 0 0.6rem;
-  margin-right: 8px;
-  margin-bottom: 8px;
   content: '';
   border: 1px solid #ddd;
   border-radius: 0.2em;
@@ -24,7 +22,7 @@
   height: 1rem;
 }
 
-.TagEditor button {
+.TagEditor button.TagName-Delete {
   padding: 0;
   cursor: pointer;
   background-color: transparent;

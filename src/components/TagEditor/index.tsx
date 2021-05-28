@@ -1,7 +1,7 @@
-import { FC, useState } from 'react';
-import TagNameCollection from './TagNameCollection';
+import { FC, useState, SyntheticEvent } from 'react';
 import './style.css';
 import DataListInput from '../DataListInput';
+import TagName from './TagName';
 
 type Tag = {
   name: string;
@@ -36,7 +36,17 @@ const TagEditor: FC<Props> = ({
 
   return (
     <div className="TagEditor">
-      <TagNameCollection tags={currentTags} onTagDeleteHandler={deleteTag} />
+      {currentTags.map((tag) => (
+        <TagName
+          name={tag.name}
+          lock={tag.lock}
+          onClickHandler={(e: SyntheticEvent) => {
+            e.preventDefault();
+            deleteTag(tag.name);
+          }}
+        />
+      ))}
+
       <DataListInput
         listName="tags"
         placeHolder="追加したいタグ名を入力"
