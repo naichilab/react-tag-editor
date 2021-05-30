@@ -4,24 +4,49 @@ import lockimg from './lock.png';
 import unlockimg from './unlock.png';
 
 type Props = {
-  lock: boolean;
-  name: string;
-  onClickHandler: MouseEventHandler<HTMLButtonElement>;
+  tagName: string;
+  showLock: boolean;
+  showUnlock: boolean;
+  showDelete: boolean;
+  onLockClick: MouseEventHandler<HTMLButtonElement>;
+  onUnlockClick: MouseEventHandler<HTMLButtonElement>;
+  onDeleteClick: MouseEventHandler<HTMLButtonElement>;
 };
 
-const TagName: FC<Props> = ({ name, lock, onClickHandler }: Props) => (
+const TagName: FC<Props> = ({
+  tagName,
+  showLock,
+  showUnlock,
+  showDelete,
+  onLockClick,
+  onUnlockClick,
+  onDeleteClick,
+}: Props) => (
   <div className="TagName">
     <div className="TagName-Contents">
-      <div className="TagName-Text">{name}</div>
-      <img
-        className="TagName-LockImg"
-        src={lock ? lockimg : unlockimg}
-        alt=""
-      />
-      {!lock && (
+      <div className="TagName-Text">{tagName}</div>
+      {showLock && (
         <button
           type="button"
-          onClick={onClickHandler}
+          className="TagName-LockButton"
+          onClick={onLockClick}
+        >
+          <img src={lockimg} alt="" />
+        </button>
+      )}
+      {showUnlock && (
+        <button
+          type="button"
+          className="TagName-LockButton"
+          onClick={onUnlockClick}
+        >
+          <img src={unlockimg} alt="" />
+        </button>
+      )}
+      {showDelete && (
+        <button
+          type="button"
+          onClick={onDeleteClick}
           className="TagName-Delete clearText"
         >
           Delete

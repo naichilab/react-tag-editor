@@ -38,9 +38,19 @@ const TagEditor: FC<Props> = ({
     <div className="TagEditor">
       {currentTags.map((tag) => (
         <TagName
-          name={tag.name}
-          lock={tag.lock}
-          onClickHandler={(e: SyntheticEvent) => {
+          tagName={tag.name}
+          showLock={tag.lock}
+          showUnlock={!tag.lock}
+          showDelete
+          onDeleteClick={(e: SyntheticEvent) => {
+            e.preventDefault();
+            deleteTag(tag.name);
+          }}
+          onLockClick={(e: SyntheticEvent) => {
+            e.preventDefault();
+            deleteTag(tag.name);
+          }}
+          onUnlockClick={(e: SyntheticEvent) => {
             e.preventDefault();
             deleteTag(tag.name);
           }}

@@ -17,9 +17,23 @@
   line-height: 1.6em;
 }
 
-.TagEditor .TagName-LockImg {
+.TagEditor .TagName-LockButton {
+  display: flex;
+  align-items: center;
+}
+
+.TagEditor .TagName-LockButton img {
   width: 1rem;
   height: 1rem;
+}
+
+.TagEditor button.TagName-LockButton {
+  padding: 0;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  appearance: none;
 }
 
 .TagEditor button.TagName-Delete {
