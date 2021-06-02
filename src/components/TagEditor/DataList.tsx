@@ -9,7 +9,7 @@ type Props = {
 const DataList: FC<Props> = ({ dataListId, options }: Props) => (
   <datalist id={dataListId} className="DataList">
     {options.map((option) => (
-      <DataListOption option={option} />
+      <DataListOption key={option} option={option} />
     ))}
   </datalist>
 );

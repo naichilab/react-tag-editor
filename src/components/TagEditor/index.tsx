@@ -43,6 +43,7 @@ const TagEditor: FC<Props> = ({
   };
 
   const onInputValueSubmitHandler = () => {
+    // eslint-disable-next-line no-console
     console.log('onInputValueSubmitHandler');
   };
 
@@ -50,6 +51,7 @@ const TagEditor: FC<Props> = ({
     <div className="TagEditor">
       {currentTags.map((tag) => (
         <TagName
+          key={tag.name}
           tagName={tag.name}
           showLock={tag.lock}
           showUnlock={!tag.lock}

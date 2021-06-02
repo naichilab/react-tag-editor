@@ -5,7 +5,12 @@ import TagEditor from './components/TagEditor';
 import reportWebVitals from './reportWebVitals';
 import tags from './tags';
 
-const currentTags = [
+type Tag = {
+  name: string;
+  lock: boolean;
+};
+
+const currentTags: Tag[] = [
   { name: 'アクション', lock: true },
   { name: 'シューティング', lock: true },
   { name: 'オンライン', lock: true },
@@ -16,10 +21,7 @@ const currentTags = [
 
 ReactDOM.render(
   <React.StrictMode>
-    <TagEditor
-      initialAllTags={tags.sort()}
-      initialCurrentTags={currentTags.sort()}
-    />
+    <TagEditor initialAllTags={tags} initialCurrentTags={currentTags.sort()} />
   </React.StrictMode>,
   document.getElementById('root'),
 );
