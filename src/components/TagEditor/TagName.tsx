@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler } from 'react';
+import { FC } from 'react';
 import './TagName.css';
 import lockimg from './lock.png';
 import unlockimg from './unlock.png';
@@ -8,9 +8,9 @@ type Props = {
   showLock: boolean;
   showUnlock: boolean;
   showDelete: boolean;
-  onLockClick: MouseEventHandler<HTMLButtonElement>;
-  onUnlockClick: MouseEventHandler<HTMLButtonElement>;
-  onDeleteClick: MouseEventHandler<HTMLButtonElement>;
+  onLockHandler: () => void;
+  onUnlockHandler: () => void;
+  onDeleteHandler: () => void;
 };
 
 const TagName: FC<Props> = ({
@@ -18,9 +18,9 @@ const TagName: FC<Props> = ({
   showLock,
   showUnlock,
   showDelete,
-  onLockClick,
-  onUnlockClick,
-  onDeleteClick,
+  onLockHandler,
+  onUnlockHandler,
+  onDeleteHandler,
 }: Props) => (
   <div className="TagName">
     <div className="TagName-Contents">
@@ -29,7 +29,10 @@ const TagName: FC<Props> = ({
         <button
           type="button"
           className="TagName-LockButton"
-          onClick={onLockClick}
+          onClick={(e) => {
+            e.preventDefault();
+            onUnlockHandler();
+          }}
         >
           <img src={lockimg} alt="" />
         </button>
@@ -38,7 +41,10 @@ const TagName: FC<Props> = ({
         <button
           type="button"
           className="TagName-LockButton"
-          onClick={onUnlockClick}
+          onClick={(e) => {
+            e.preventDefault();
+            onLockHandler();
+          }}
         >
           <img src={unlockimg} alt="" />
         </button>
@@ -46,7 +52,10 @@ const TagName: FC<Props> = ({
       {showDelete && (
         <button
           type="button"
-          onClick={onDeleteClick}
+          onClick={(e) => {
+            e.preventDefault();
+            onDeleteHandler();
+          }}
           className="TagName-Delete clearText"
         >
           Delete

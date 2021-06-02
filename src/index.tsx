@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import TagEditor from './components/TagEditor';
 import reportWebVitals from './reportWebVitals';
-import tags from './tags';
+import allTagNames from './tags';
 
 type Tag = {
   name: string;
@@ -21,7 +21,10 @@ const currentTags: Tag[] = [
 
 ReactDOM.render(
   <React.StrictMode>
-    <TagEditor initialAllTags={tags} initialCurrentTags={currentTags.sort()} />
+    <TagEditor
+      allTagNames={allTagNames}
+      initialCurrentTags={currentTags.sort()}
+    />
   </React.StrictMode>,
   document.getElementById('root'),
 );

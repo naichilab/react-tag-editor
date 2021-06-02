@@ -1,4 +1,4 @@
-import { FC, useState, SyntheticEvent, ChangeEventHandler } from 'react';
+import { FC, useState, ChangeEventHandler } from 'react';
 import './style.css';
 import DataListInput from './DataListInput';
 import TagName from './TagName';
@@ -10,29 +10,37 @@ type Tag = {
 
 type Props = {
   initialCurrentTags: Tag[];
-  initialAllTags: string[];
+  allTagNames: string[];
 };
 
-const TagEditor: FC<Props> = ({
-  initialCurrentTags,
-  initialAllTags,
-}: Props) => {
+const TagEditor: FC<Props> = ({ initialCurrentTags, allTagNames }: Props) => {
   const [currentTags, setCurrentTags] = useState<Tag[]>(initialCurrentTags);
   const [inputValue, setInputValue] = useState<string>('');
 
-  // const addCurrentTag = (newTag: Tag) => {
-  //   if (newTag.name === '') return;
-  //   setCurrentTags((c) => {
-  //     const copy = c.slice();
-  //     copy.push(newTag);
-  //     const copy2 = Array.from(new Set(copy));
+  const addTag = (newTag: Tag) => {
+    setCurrentTags((current) => current.concat([newTag]));
+  };
 
-  //     return copy2;
-  //   });
-  // };
+  const lockTag = (tag: Tag) => {
+    setCurrentTags((current) =>
+      current.map((t) => ({
+        ...t,
+        ...(t.name === tag.name ? { lock: true } : {}),
+      })),
+    );
+  };
 
-  const deleteTag = (tagName: string) => {
-    setCurrentTags((tags) => tags.filter((x) => x.name !== tagName));
+  const unlockTag = (tag: Tag) => {
+    setCurrentTags((current) =>
+      current.map((t) => ({
+        ...t,
+        ...(t.name === tag.name ? { lock: false } : {}),
+      })),
+    );
+  };
+
+  const deleteTag = (tag: Tag) => {
+    setCurrentTags((tags) => tags.filter((x) => x.name !== tag.name));
   };
 
   const onInputValueChangedHandler: ChangeEventHandler<HTMLInputElement> = (
@@ -43,8 +51,10 @@ const TagEditor: FC<Props> = ({
   };
 
   const onInputValueSubmitHandler = () => {
-    // eslint-disable-next-line no-console
-    console.log('onInputValueSubmitHandler');
+    if (inputValue === '') return;
+    if (currentTags.some((t) => t.name === inputValue)) return;
+    addTag({ name: inputValue, lock: false });
+    setInputValue('');
   };
 
   return (
@@ -56,17 +66,14 @@ const TagEditor: FC<Props> = ({
           showLock={tag.lock}
           showUnlock={!tag.lock}
           showDelete
-          onDeleteClick={(e: SyntheticEvent) => {
-            e.preventDefault();
-            deleteTag(tag.name);
+          onLockHandler={() => {
+            lockTag(tag);
           }}
-          onLockClick={(e: SyntheticEvent) => {
-            e.preventDefault();
-            deleteTag(tag.name);
+          onUnlockHandler={() => {
+            unlockTag(tag);
           }}
-          onUnlockClick={(e: SyntheticEvent) => {
-            e.preventDefault();
-            deleteTag(tag.name);
+          onDeleteHandler={() => {
+            deleteTag(tag);
           }}
         />
       ))}
@@ -74,7 +81,7 @@ const TagEditor: FC<Props> = ({
       <DataListInput
         listName="tags"
         placeHolder="追加したいタグ名を入力"
-        options={initialAllTags}
+        options={allTagNames}
         inputValue={inputValue}
         onChangeHandle={onInputValueChangedHandler}
         onSubmitHandle={onInputValueSubmitHandler}
