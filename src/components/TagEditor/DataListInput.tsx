@@ -2,27 +2,22 @@ import { ChangeEventHandler, FC } from 'react';
 import './DataListInput.css';
 import DataList from './DataList';
 
-type Tag = {
-  name: string;
-  lock: boolean;
-};
-
 type Props = {
   listName: string;
   options: string[];
   placeHolder: string;
-  addCurrentTag: (newTag: Tag) => void;
   inputValue: string | undefined;
   onChangeHandle: ChangeEventHandler<HTMLInputElement> | undefined;
+  onSubmitHandle: () => void;
 };
 
 const DataListInput: FC<Props> = ({
   listName,
   options,
   placeHolder,
-  addCurrentTag,
   inputValue,
   onChangeHandle,
+  onSubmitHandle,
 }: Props) => (
   <div className="DataListInput">
     <input
@@ -31,14 +26,21 @@ const DataListInput: FC<Props> = ({
       onKeyPress={(e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
-          addCurrentTag({ name: e.currentTarget.value, lock: false });
-          e.currentTarget.value = '';
+          onSubmitHandle();
         }
       }}
       value={inputValue}
       onChange={onChangeHandle}
     />
-    <button type="button">登録</button>
+    <button
+      type="button"
+      onClick={(e) => {
+        e.preventDefault();
+        onSubmitHandle();
+      }}
+    >
+      登録
+    </button>
     <DataList dataListId={listName} options={options} />
   </div>
 );

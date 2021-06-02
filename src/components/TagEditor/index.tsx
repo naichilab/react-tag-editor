@@ -20,16 +20,16 @@ const TagEditor: FC<Props> = ({
   const [currentTags, setCurrentTags] = useState<Tag[]>(initialCurrentTags);
   const [inputValue, setInputValue] = useState<string>();
 
-  const addCurrentTag = (newTag: Tag) => {
-    if (newTag.name === '') return;
-    setCurrentTags((c) => {
-      const copy = c.slice();
-      copy.push(newTag);
-      const copy2 = Array.from(new Set(copy));
+  // const addCurrentTag = (newTag: Tag) => {
+  //   if (newTag.name === '') return;
+  //   setCurrentTags((c) => {
+  //     const copy = c.slice();
+  //     copy.push(newTag);
+  //     const copy2 = Array.from(new Set(copy));
 
-      return copy2;
-    });
-  };
+  //     return copy2;
+  //   });
+  // };
 
   const deleteTag = (tagName: string) => {
     setCurrentTags((tags) => tags.filter((x) => x.name !== tagName));
@@ -40,6 +40,10 @@ const TagEditor: FC<Props> = ({
   ) => {
     e.preventDefault();
     setInputValue(e.target.value);
+  };
+
+  const onInputValueSubmitHandler = () => {
+    console.log('onInputValueSubmitHandler');
   };
 
   return (
@@ -69,9 +73,9 @@ const TagEditor: FC<Props> = ({
         listName="tags"
         placeHolder="追加したいタグ名を入力"
         options={initialAllTags}
-        addCurrentTag={addCurrentTag}
         inputValue={inputValue}
         onChangeHandle={onInputValueChangedHandler}
+        onSubmitHandle={onInputValueSubmitHandler}
       />
     </div>
   );
