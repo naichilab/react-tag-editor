@@ -3,41 +3,44 @@ import './TagName.css';
 import lockimg from './lock.png';
 import unlockimg from './unlock.png';
 
+type Tag = {
+  name: string;
+  lock: boolean;
+};
+
 type Props = {
-  tagName: string;
-  showLock: boolean;
-  showUnlock: boolean;
-  showDelete: boolean;
+  tag: Tag;
+  own: boolean;
   onLockHandler: () => void;
   onUnlockHandler: () => void;
   onDeleteHandler: () => void;
 };
 
 const TagName: FC<Props> = ({
-  tagName,
-  showLock,
-  showUnlock,
-  showDelete,
+  tag,
+  own,
   onLockHandler,
   onUnlockHandler,
   onDeleteHandler,
 }: Props) => (
   <div className="TagName">
     <div className="TagName-Contents">
-      <div className="TagName-Text">{tagName}</div>
-      {showLock && (
+      <div className="TagName-Text">{tag.name}</div>
+      {tag.lock && (
         <button
           type="button"
+          disabled={!own}
           className="TagName-LockButton"
           onClick={(e) => {
             e.preventDefault();
+            if (!own) return;
             onUnlockHandler();
           }}
         >
           <img src={lockimg} alt="" />
         </button>
       )}
-      {showUnlock && (
+      {own && !tag.lock && (
         <button
           type="button"
           className="TagName-LockButton"
@@ -49,7 +52,7 @@ const TagName: FC<Props> = ({
           <img src={unlockimg} alt="" />
         </button>
       )}
-      {showDelete && (
+      {(own || !tag.lock) && (
         <button
           type="button"
           onClick={(e) => {

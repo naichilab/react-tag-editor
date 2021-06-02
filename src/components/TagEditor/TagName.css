@@ -36,6 +36,10 @@
   appearance: none;
 }
 
+.TagEditor button.TagName-LockButton:disabled {
+  cursor: default;
+}
+
 .TagEditor button.TagName-Delete {
   padding: 0;
   cursor: pointer;

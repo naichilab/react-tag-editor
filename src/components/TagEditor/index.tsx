@@ -62,10 +62,8 @@ const TagEditor: FC<Props> = ({ initialCurrentTags, allTagNames }: Props) => {
       {currentTags.map((tag) => (
         <TagName
           key={tag.name}
-          tagName={tag.name}
-          showLock={tag.lock}
-          showUnlock={!tag.lock}
-          showDelete
+          tag={tag}
+          own
           onLockHandler={() => {
             lockTag(tag);
           }}
