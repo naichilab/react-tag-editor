@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { ChangeEventHandler, FC } from 'react';
 import './DataListInput.css';
 import DataList from './DataList';
 
@@ -12,6 +12,8 @@ type Props = {
   options: string[];
   placeHolder: string;
   addCurrentTag: (newTag: Tag) => void;
+  inputValue: string | undefined;
+  onChangeHandle: ChangeEventHandler<HTMLInputElement> | undefined;
 };
 
 const DataListInput: FC<Props> = ({
@@ -19,6 +21,8 @@ const DataListInput: FC<Props> = ({
   options,
   placeHolder,
   addCurrentTag,
+  inputValue,
+  onChangeHandle,
 }: Props) => (
   <div className="DataListInput">
     <input
@@ -31,6 +35,8 @@ const DataListInput: FC<Props> = ({
           e.currentTarget.value = '';
         }
       }}
+      value={inputValue}
+      onChange={onChangeHandle}
     />
     <button type="button">登録</button>
     <DataList dataListId={listName} options={options} />

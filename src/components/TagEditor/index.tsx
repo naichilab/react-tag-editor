@@ -1,4 +1,4 @@
-import { FC, useState, SyntheticEvent } from 'react';
+import { FC, useState, SyntheticEvent, ChangeEventHandler } from 'react';
 import './style.css';
 import DataListInput from './DataListInput';
 import TagName from './TagName';
@@ -18,6 +18,7 @@ const TagEditor: FC<Props> = ({
   initialAllTags,
 }: Props) => {
   const [currentTags, setCurrentTags] = useState<Tag[]>(initialCurrentTags);
+  const [inputValue, setInputValue] = useState<string>();
 
   const addCurrentTag = (newTag: Tag) => {
     if (newTag.name === '') return;
@@ -32,6 +33,13 @@ const TagEditor: FC<Props> = ({
 
   const deleteTag = (tagName: string) => {
     setCurrentTags((tags) => tags.filter((x) => x.name !== tagName));
+  };
+
+  const onInputValueChangedHandler: ChangeEventHandler<HTMLInputElement> = (
+    e,
+  ) => {
+    e.preventDefault();
+    setInputValue(e.target.value);
   };
 
   return (
@@ -62,6 +70,8 @@ const TagEditor: FC<Props> = ({
         placeHolder="追加したいタグ名を入力"
         options={initialAllTags}
         addCurrentTag={addCurrentTag}
+        inputValue={inputValue}
+        onChangeHandle={onInputValueChangedHandler}
       />
     </div>
   );
