@@ -1,4 +1,4 @@
-module.exports = [
+const tags = [
   'シューティング',
   'アクション',
   'アドベンチャー',
@@ -4601,3 +4601,7 @@ module.exports = [
   'casual',
   'shortgame',
 ];
+
+const set = new Set(tags);
+const setToArr = Array.from(set);
+module.exports = setToArr.sort();
