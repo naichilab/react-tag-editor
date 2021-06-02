@@ -18,7 +18,7 @@ const TagEditor: FC<Props> = ({
   initialAllTags,
 }: Props) => {
   const [currentTags, setCurrentTags] = useState<Tag[]>(initialCurrentTags);
-  const [inputValue, setInputValue] = useState<string>();
+  const [inputValue, setInputValue] = useState<string>('');
 
   // const addCurrentTag = (newTag: Tag) => {
   //   if (newTag.name === '') return;
