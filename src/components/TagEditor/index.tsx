@@ -1,6 +1,6 @@
 import { FC, useState, SyntheticEvent } from 'react';
 import './style.css';
-import DataListInput from '../DataListInput';
+import DataListInput from './DataListInput';
 import TagName from './TagName';
 
 type Tag = {

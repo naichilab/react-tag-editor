@@ -82,7 +82,7 @@
   border-color: #000;
 }
 
-.clearText {
+.TagEditor .clearText {
   overflow: hidden;
   text-indent: 300%;
   white-space: nowrap;

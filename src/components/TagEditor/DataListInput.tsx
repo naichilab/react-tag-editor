@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import './style.css';
+import './DataListInput.css';
 import DataList from './DataList';
 
 type Tag = {
