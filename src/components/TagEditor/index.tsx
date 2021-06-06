@@ -2,6 +2,7 @@ import { FC, useState, ChangeEventHandler } from 'react';
 import './style.css';
 import DataListInput from './DataListInput';
 import TagName from './TagName';
+import Modal from '../Modal';
 
 type Tag = {
   name: string;
@@ -16,6 +17,12 @@ type Props = {
 const TagEditor: FC<Props> = ({ initialCurrentTags, allTagNames }: Props) => {
   const [currentTags, setCurrentTags] = useState<Tag[]>(initialCurrentTags);
   const [inputValue, setInputValue] = useState<string>('');
+
+  const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
+  const [deleteTarget, setDeleteTarget] = useState<Tag>({
+    name: '',
+    lock: false,
+  });
 
   const addTag = (newTag: Tag) => {
     setCurrentTags((current) => current.concat([newTag]));
@@ -39,8 +46,13 @@ const TagEditor: FC<Props> = ({ initialCurrentTags, allTagNames }: Props) => {
     );
   };
 
-  const deleteTag = (tag: Tag) => {
-    setCurrentTags((tags) => tags.filter((x) => x.name !== tag.name));
+  const deleteTagConfirm = (tag: Tag) => {
+    setDeleteTarget(tag);
+    setShowDeleteConfirmModal(true);
+  };
+
+  const deleteTag = () => {
+    setCurrentTags((tags) => tags.filter((x) => x.name !== deleteTarget.name));
   };
 
   const onInputValueChangedHandler: ChangeEventHandler<HTMLInputElement> = (
@@ -57,6 +69,10 @@ const TagEditor: FC<Props> = ({ initialCurrentTags, allTagNames }: Props) => {
     setInputValue('');
   };
 
+  const closeModal = () => {
+    setShowDeleteConfirmModal(false);
+  };
+
   return (
     <div className="TagEditor">
       {currentTags.map((tag) => (
@@ -71,7 +87,7 @@ const TagEditor: FC<Props> = ({ initialCurrentTags, allTagNames }: Props) => {
             unlockTag(tag);
           }}
           onDeleteHandler={() => {
-            deleteTag(tag);
+            deleteTagConfirm(tag);
           }}
         />
       ))}
@@ -83,6 +99,29 @@ const TagEditor: FC<Props> = ({ initialCurrentTags, allTagNames }: Props) => {
         inputValue={inputValue}
         onChangeHandle={onInputValueChangedHandler}
         onSubmitHandle={onInputValueSubmitHandler}
+      />
+
+      <Modal
+        show={showDeleteConfirmModal}
+        text={`"タグ「${deleteTarget.name}」を削除しますか？`}
+        onOverlayClick={() => closeModal()}
+        buttons={[
+          {
+            label: '削除',
+            className: 'danger',
+            onClick: () => {
+              deleteTag();
+              closeModal();
+            },
+          },
+          {
+            label: 'キャンセル',
+            className: 'cancel',
+            onClick: () => {
+              closeModal();
+            },
+          },
+        ]}
       />
     </div>
   );
