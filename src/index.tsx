@@ -22,14 +22,27 @@ const currentTags: Tag[] = [
 ReactDOM.render(
   <React.StrictMode>
     <div className="tageditor-wrapper">
+      編集可＆オーナー
       <TagEditor
+        editable
         allTagNames={allTagNames}
         initialCurrentTags={currentTags.sort()}
         own
       />
     </div>
     <div className="tageditor-wrapper">
+      編集可＆ゲスト
       <TagEditor
+        editable
+        allTagNames={allTagNames}
+        initialCurrentTags={currentTags.sort()}
+        own={false}
+      />
+    </div>
+    <div className="tageditor-wrapper">
+      編集不可
+      <TagEditor
+        editable={false}
         allTagNames={allTagNames}
         initialCurrentTags={currentTags.sort()}
         own={false}

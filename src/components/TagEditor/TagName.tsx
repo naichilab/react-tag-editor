@@ -9,6 +9,7 @@ type Tag = {
 };
 
 type Props = {
+  editable: boolean;
   tag: Tag;
   own: boolean;
   onLockHandler: () => void;
@@ -17,6 +18,7 @@ type Props = {
 };
 
 const TagName: FC<Props> = ({
+  editable,
   tag,
   own,
   onLockHandler,
@@ -33,6 +35,7 @@ const TagName: FC<Props> = ({
           className="TagName-LockButton"
           onClick={(e) => {
             e.preventDefault();
+            if (!editable) return;
             if (!own) return;
             onUnlockHandler();
           }}
@@ -46,17 +49,19 @@ const TagName: FC<Props> = ({
           className="TagName-LockButton"
           onClick={(e) => {
             e.preventDefault();
+            if (!editable) return;
             onLockHandler();
           }}
         >
           <img src={unlockimg} alt="" />
         </button>
       )}
-      {(own || !tag.lock) && (
+      {editable && (own || !tag.lock) && (
         <button
           type="button"
           onClick={(e) => {
             e.preventDefault();
+            if (!editable) return;
             onDeleteHandler();
           }}
           className="TagName-Delete clearText"

@@ -10,12 +10,14 @@ type Tag = {
 };
 
 type Props = {
+  editable: boolean;
   initialCurrentTags: Tag[];
   allTagNames: string[];
   own: boolean;
 };
 
 const TagEditor: FC<Props> = ({
+  editable,
   initialCurrentTags,
   allTagNames,
   own,
@@ -82,6 +84,7 @@ const TagEditor: FC<Props> = ({
     <div className="TagEditor">
       {currentTags.map((tag) => (
         <TagName
+          editable={editable}
           key={tag.name}
           tag={tag}
           own={own}
@@ -97,14 +100,16 @@ const TagEditor: FC<Props> = ({
         />
       ))}
 
-      <DataListInput
-        listName="tags"
-        placeHolder="追加したいタグ名を入力"
-        options={allTagNames}
-        inputValue={inputValue}
-        onChangeHandle={onInputValueChangedHandler}
-        onSubmitHandle={onInputValueSubmitHandler}
-      />
+      {editable && (
+        <DataListInput
+          listName="tags"
+          placeHolder="追加したいタグ名を入力"
+          options={allTagNames}
+          inputValue={inputValue}
+          onChangeHandle={onInputValueChangedHandler}
+          onSubmitHandle={onInputValueSubmitHandler}
+        />
+      )}
 
       <Modal
         show={showDeleteConfirmModal}
