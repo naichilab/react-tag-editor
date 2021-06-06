@@ -2,7 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding: 40px;
+  margin-right: -8px;
+  margin-bottom: -8px;
 }
 
 .TagEditor > * {

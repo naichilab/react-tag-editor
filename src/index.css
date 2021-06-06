@@ -25,3 +25,7 @@ code {
     'Courier New',
     monospace;
 }
+
+.tageditor-wrapper {
+  padding: 20px;
+}

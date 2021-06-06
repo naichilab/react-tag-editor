@@ -12,9 +12,14 @@ type Tag = {
 type Props = {
   initialCurrentTags: Tag[];
   allTagNames: string[];
+  own: boolean;
 };
 
-const TagEditor: FC<Props> = ({ initialCurrentTags, allTagNames }: Props) => {
+const TagEditor: FC<Props> = ({
+  initialCurrentTags,
+  allTagNames,
+  own,
+}: Props) => {
   const [currentTags, setCurrentTags] = useState<Tag[]>(initialCurrentTags);
   const [inputValue, setInputValue] = useState<string>('');
 
@@ -79,7 +84,7 @@ const TagEditor: FC<Props> = ({ initialCurrentTags, allTagNames }: Props) => {
         <TagName
           key={tag.name}
           tag={tag}
-          own
+          own={own}
           onLockHandler={() => {
             lockTag(tag);
           }}

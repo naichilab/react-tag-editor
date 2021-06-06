@@ -21,10 +21,20 @@ const currentTags: Tag[] = [
 
 ReactDOM.render(
   <React.StrictMode>
-    <TagEditor
-      allTagNames={allTagNames}
-      initialCurrentTags={currentTags.sort()}
-    />
+    <div className="tageditor-wrapper">
+      <TagEditor
+        allTagNames={allTagNames}
+        initialCurrentTags={currentTags.sort()}
+        own
+      />
+    </div>
+    <div className="tageditor-wrapper">
+      <TagEditor
+        allTagNames={allTagNames}
+        initialCurrentTags={currentTags.sort()}
+        own={false}
+      />
+    </div>
   </React.StrictMode>,
   document.getElementById('root'),
 );
