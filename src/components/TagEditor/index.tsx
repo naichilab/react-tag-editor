@@ -3,6 +3,7 @@ import './style.css';
 import DataListInput from './DataListInput';
 import TagName from './TagName';
 import Modal from '../Modal';
+import Errors from './Errors';
 
 type Tag = {
   name: string;
@@ -24,7 +25,7 @@ const TagEditor: FC<Props> = ({
 }: Props) => {
   const [currentTags, setCurrentTags] = useState<Tag[]>(initialCurrentTags);
   const [inputValue, setInputValue] = useState<string>('');
-
+  const [errors, setErrors] = useState<string[]>([]);
   const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<Tag>({
     name: '',
@@ -33,6 +34,10 @@ const TagEditor: FC<Props> = ({
 
   const addTag = (newTag: Tag) => {
     setCurrentTags((current) => current.concat([newTag]));
+  };
+
+  const deleteTag = (tag: Tag) => {
+    setCurrentTags((tags) => tags.filter((x) => x.name !== tag.name));
   };
 
   const lockTag = (tag: Tag) => {
@@ -58,10 +63,6 @@ const TagEditor: FC<Props> = ({
     setShowDeleteConfirmModal(true);
   };
 
-  const deleteTag = () => {
-    setCurrentTags((tags) => tags.filter((x) => x.name !== deleteTarget.name));
-  };
-
   const onInputValueChangedHandler: ChangeEventHandler<HTMLInputElement> = (
     e,
   ) => {
@@ -76,64 +77,72 @@ const TagEditor: FC<Props> = ({
     setInputValue('');
   };
 
-  const closeModal = () => {
+  const onModalOkHandler = () => {
+    deleteTag(deleteTarget);
     setShowDeleteConfirmModal(false);
   };
 
+  const onModalCancelHandler = () => {
+    // set error
+    setErrors((current) => current.concat(['new error']));
+    setShowDeleteConfirmModal(false);
+  };
+
+  const onErrorClearHandler = () => {
+    setErrors(() => []);
+  };
+
   return (
-    <div className="TagEditor">
-      {currentTags.map((tag) => (
-        <TagName
-          editable={editable}
-          key={tag.name}
-          tag={tag}
-          own={own}
-          onLockHandler={() => {
-            lockTag(tag);
-          }}
-          onUnlockHandler={() => {
-            unlockTag(tag);
-          }}
-          onDeleteHandler={() => {
-            deleteTagConfirm(tag);
-          }}
-        />
-      ))}
+    <>
+      <div className="TagEditor">
+        {currentTags.map((tag) => (
+          <TagName
+            editable={editable}
+            key={tag.name}
+            tag={tag}
+            own={own}
+            onLockHandler={() => {
+              lockTag(tag);
+            }}
+            onUnlockHandler={() => {
+              unlockTag(tag);
+            }}
+            onDeleteHandler={() => {
+              deleteTagConfirm(tag);
+            }}
+          />
+        ))}
 
-      {editable && (
-        <DataListInput
-          listName="tags"
-          placeHolder="追加したいタグ名を入力"
-          options={allTagNames}
-          inputValue={inputValue}
-          onChangeHandle={onInputValueChangedHandler}
-          onSubmitHandle={onInputValueSubmitHandler}
-        />
-      )}
-
+        {editable && (
+          <DataListInput
+            listName="tags"
+            placeHolder="追加したいタグ名を入力"
+            options={allTagNames}
+            inputValue={inputValue}
+            onChangeHandle={onInputValueChangedHandler}
+            onSubmitHandle={onInputValueSubmitHandler}
+          />
+        )}
+      </div>
+      <Errors errors={errors} clearHandler={onErrorClearHandler} />
       <Modal
         show={showDeleteConfirmModal}
-        text={`"タグ「${deleteTarget.name}」を削除しますか？`}
-        onOverlayClick={() => closeModal()}
+        text={`タグ「${deleteTarget.name}」を削除しますか？`}
+        onOverlayClick={onModalCancelHandler}
         buttons={[
           {
             label: '削除',
             className: 'danger',
-            onClick: () => {
-              deleteTag();
-              closeModal();
-            },
+            onClick: onModalOkHandler,
           },
           {
             label: 'キャンセル',
             className: 'cancel',
-            onClick: () => {
-              closeModal();
-            },
+            onClick: onModalCancelHandler,
           },
         ]}
       />
-    </div>
+    </>
   );
 };
 

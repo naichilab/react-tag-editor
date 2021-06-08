@@ -1,0 +1,56 @@
+.TagEditor-Errors .Error {
+  line-height: 1.6rem;
+  color: red;
+}
+
+.TagEditor-Errors button.Error-Delete {
+  padding: 0;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  appearance: none;
+}
+
+.TagEditor-Errors .Error-Delete {
+  position: relative;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 0.2rem;
+}
+
+.TagEditor-Errors .Error-Delete::after,
+.TagEditor-Errors .Error-Delete::before {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  display: block;
+  width: 40%;
+  margin: auto;
+  content: '';
+  border-top: 1px solid rgb(172, 172, 172);
+}
+
+.TagEditor-Errors .Error-Delete::after {
+  transform: skewY(-45deg);
+}
+
+.TagEditor-Errors .Error-Delete::before {
+  transform: skewY(45deg);
+}
+
+.TagEditor-Errors .Error-Delete:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+.TagEditor-Errors .Error-Delete:hover::after,
+.TagEditor-Errors .Error-Delete:hover::before {
+  border-color: #000;
+}
+
+.TagEditor-Errors .clearText {
+  overflow: hidden;
+  text-indent: 300%;
+  white-space: nowrap;
+}
